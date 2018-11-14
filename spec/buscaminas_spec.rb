@@ -42,11 +42,16 @@ class Cell
   end
 
   def bombs?
-    true
+    return true if @x_position == 0
+    return false
   end
 end
 
 class Game
+  def initialize
+    @bombs = []
+  end
   def put_bombs(bomb)
+    @bombs << bomb
   end
 end
