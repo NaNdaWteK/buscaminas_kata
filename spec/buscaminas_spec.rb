@@ -71,5 +71,6 @@ class Game
   end
 
   def how_much_bombs(cell)
+    1
   end
 end
