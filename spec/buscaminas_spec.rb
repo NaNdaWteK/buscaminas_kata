@@ -57,45 +57,20 @@ class Game
   end
 
   def how_much_bombs(cell)
-    up_bombs(cell) + side_bombs(cell) + down_bombs(cell)
+    bombs = 0
+    positions = [-1, 0, +1]
+    @bombs.each do |bomb|
+      positions.each do |position|
+        bombs += 1 if bomb?(bomb, cell, position) && bomb_near?(bomb, cell)
+      end
+    end
+    bombs
   end
 
   private
 
-  def up_bombs(cell)
-    bombs = 0
-    @bombs.each do |bomb|
-      bombs += 1 if bomb_up?(bomb, cell) && bomb_near?(bomb, cell)
-    end
-    bombs
-  end
-
-  def side_bombs(cell)
-    bombs = 0
-    @bombs.each do |bomb|
-      bombs += 1 if bomb_side?(bomb, cell) && bomb_near?(bomb, cell)
-    end
-    bombs
-  end
-
-  def down_bombs(cell)
-    bombs = 0
-    @bombs.each do |bomb|
-      bombs += 1 if bomb_down?(bomb, cell) && bomb_near?(bomb, cell)
-    end
-    bombs
-  end
-
-  def bomb_down?(bomb, cell)
-    bomb.x_position == cell.x_position + 1
-  end
-
-  def bomb_side?(bomb, cell)
-    bomb.x_position == cell.x_position
-  end
-
-  def bomb_up?(bomb, cell)
-    bomb.x_position == cell.x_position - 1
+  def bomb?(bomb, cell, position)
+    bomb.x_position == cell.x_position + position
   end
 
   def bomb_near?(bomb, cell)
