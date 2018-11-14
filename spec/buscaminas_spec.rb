@@ -37,6 +37,14 @@ class Bomb
     @x_position = x_position
     @y_position = y_position
   end
+
+  def x_position
+    @x_position
+  end
+
+  def y_position
+    @y_position
+  end
 end
 
 class Cell
@@ -47,6 +55,10 @@ class Cell
 
   def x_position
     @x_position
+  end
+
+  def y_position
+    @y_position
   end
 end
 
@@ -60,7 +72,48 @@ class Game
   end
 
   def how_much_bombs(cell)
-    return 1 if cell.x_position == 0
-    return 2
+    up_bombs(cell) + side_bombs(cell) + down_bombs(cell)
+  end
+
+  private
+
+  def up_bombs(cell)
+    bombs = 0
+    @bombs.each do |bomb|
+      bombs += 1 if bomb_up?(bomb, cell) && bomb_near?(bomb, cell)
+    end
+    bombs
+  end
+
+  def side_bombs(cell)
+    bombs = 0
+    @bombs.each do |bomb|
+      bombs += 1 if bomb_side?(bomb, cell) && bomb_near?(bomb, cell)
+    end
+    bombs
+  end
+
+  def down_bombs(cell)
+    bombs = 0
+    @bombs.each do |bomb|
+      bombs += 1 if bomb_down?(bomb, cell) && bomb_near?(bomb, cell)
+    end
+    bombs
+  end
+
+  def bomb_down?(bomb, cell)
+    bomb.x_position == cell.x_position + 1
+  end
+
+  def bomb_side?(bomb, cell)
+    bomb.x_position == cell.x_position
+  end
+
+  def bomb_up?(bomb, cell)
+    bomb.x_position == cell.x_position - 1
+  end
+
+  def bomb_near?(bomb, cell)
+    cell.y_position == bomb.y_position || cell.y_position + 1 == bomb.y_position || cell.y_position - 1 == bomb.y_position
   end
 end
