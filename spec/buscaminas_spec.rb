@@ -5,10 +5,10 @@ describe 'Game' do
       y_bomb = 0
       x_cell = 0
       y_cell = 1
-      bomb = Bomb.new(x_bomb, y_bomb)
+      bomb = Position.new(x_bomb, y_bomb)
       game = Game.new
       game.put_bombs(bomb)
-      cell = Cell.new(x_cell, y_cell)
+      cell = Position.new(x_cell, y_cell)
 
       expect(game.how_much_bombs(cell)).to eq 1
     end
@@ -18,36 +18,21 @@ describe 'Game' do
       y_bomb = 0
       x_cell = 1
       y_cell = 0
-      one_bomb = Bomb.new(x_bomb, y_bomb)
+      one_bomb = Position.new(x_bomb, y_bomb)
       x_bomb = 2
       y_bomb = 1
-      second_bomb = Bomb.new(x_bomb, y_bomb)
+      second_bomb = Position.new(x_bomb, y_bomb)
       game = Game.new
       game.put_bombs(one_bomb)
       game.put_bombs(second_bomb)
-      cell = Cell.new(x_cell, y_cell)
+      cell = Position.new(x_cell, y_cell)
 
       expect(game.how_much_bombs(cell)).to eq 2
     end
   end
 end
 
-class Bomb
-  def initialize(x_position, y_position)
-    @x_position = x_position
-    @y_position = y_position
-  end
-
-  def x_position
-    @x_position
-  end
-
-  def y_position
-    @y_position
-  end
-end
-
-class Cell
+class Position
   def initialize(x_position, y_position)
     @x_position = x_position
     @y_position = y_position
