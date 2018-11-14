@@ -27,8 +27,9 @@ class Cell
     @x_position = x_position
     @y_position = y_position
   end
-  
+
   def bombs?
+    true
   end
 end
 
