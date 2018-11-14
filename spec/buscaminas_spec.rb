@@ -16,8 +16,8 @@ describe 'Game' do
     it 'game cell know has more than one bomb near' do
       x_bomb = 0
       y_bomb = 0
-      x_cell = 0
-      y_cell = 1
+      x_cell = 1
+      y_cell = 0
       one_bomb = Bomb.new(x_bomb, y_bomb)
       x_bomb = 2
       y_bomb = 1
@@ -44,6 +44,10 @@ class Cell
     @x_position = x_position
     @y_position = y_position
   end
+
+  def x_position
+    @x_position
+  end
 end
 
 class Game
@@ -56,6 +60,7 @@ class Game
   end
 
   def how_much_bombs(cell)
-      1
+    return 1 if cell.x_position == 0
+    return 2
   end
 end
