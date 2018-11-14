@@ -1,6 +1,6 @@
 describe 'Game' do
   context 'Cell' do
-    it 'knows if has a bomb near its position' do
+    it 'knows it has a bomb near its position' do
       x_bomb = 0
       y_bomb = 0
       x_cell = 0
@@ -11,6 +11,19 @@ describe 'Game' do
       cell = Cell.new(x_cell, y_cell)
 
       expect(cell.bombs?).to be true
+    end
+
+    it 'knows it has not a bomb near its position' do
+      x_bomb = 0
+      y_bomb = 0
+      x_cell = 2
+      y_cell = 3
+      bomb = Bomb.new(x_bomb, y_bomb)
+      game = Game.new
+      game.put_bombs(bomb)
+      cell = Cell.new(x_cell, y_cell)
+
+      expect(cell.bombs?).to be false
     end
   end
 end
